@@ -1,0 +1,15 @@
+{
+  "name": "0503_static",
+  "version": "1.0.0",
+  "description": "Een Express webserver met API en statische website",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Peter Kassenaar",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.13.2",
+    "express": "^4.12.4"
+  }
+}

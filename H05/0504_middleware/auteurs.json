@@ -1,0 +1,22 @@
+[
+  {
+	"id": 1,
+	"naam": "Peter Kassenaar",
+	"specialiteit": "JavaScript, AngularJS, jQuery, Node.js"
+  },
+  {
+	"id": 2,
+	"naam": "Michiel de Rond",
+	"specialiteit": "IIS, SQL Server, iOS, Android"
+  },
+  {
+	"id": 3,
+	"naam": "Bob van Duuren",
+	"specialiteit": "Windows, CorelDRAW, Ventura"
+  },
+  {
+	"id": 4,
+	"naam": "Pieter Dhaeze",
+	"specialiteit": "Fotografie, Photoshop, Canon, Nikon"
+  }
+]

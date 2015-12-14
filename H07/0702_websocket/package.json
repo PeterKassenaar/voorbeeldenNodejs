@@ -1,0 +1,19 @@
+{
+  "name": "0702_websocket",
+  "version": "1.0.0",
+  "description": "Voorbeeld websockets en RTC",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "test",
+    "websocket",
+    "RTC"
+  ],
+  "author": "Peter Kassenaar",
+  "license": "MIT",
+  "dependencies": {
+    "nodejs-websocket": "^1.2.1"
+  }
+}

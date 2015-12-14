@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="nl">
+<head>
+	<meta charset="UTF-8">
+	<title>Boeken</title>
+	<link rel="stylesheet" href="js/lib/bootstrap/dist/css/bootstrap.min.css"/>
+</head>
+<body ng-app="myApp">
+<div class="container" ng-controller="boekController as vm">
+	<h1>Boeken</h1>
+	<table class="table table-striped">
+		<tr>
+			<th>ID</th>
+			<th>Titel</th>
+			<th>auteur</th>
+			<th>ISBN</th>
+		</tr>
+		<tr ng-repeat="boek in vm.boeken">
+			<td>{{boek.id}}</td>
+			<td>{{boek.titel}}</td>
+			<td>{{boek.auteur}}</td>
+			<td>{{boek.ISBN}}</td>
+		</tr>
+	</table>
+	<button class="btn btn-lg btn-primary btn-block" ng-click="vm.showForm()">Boek toevoegen</button>
+
+	<div ng-show="vm.addBookVisible">
+		<form class="form-signin col-md-6">
+			<h2 class="form-signin-heading">Nieuw boek toevoegen</h2>
+			<label for="titel">Titel</label>
+			<input ng-model="vm.titel" type="text" id="titel" name="titel" class="form-control" placeholder="Titel"
+				   required
+				   autofocus>
+
+			<label for="auteur">Auteur</label>
+			<input ng-model="vm.auteur" type="text" id="auteur" name="auteur" class="form-control" placeholder="Auteur"
+				   required>
+			<label for="auteur">ISBN</label>
+			<input ng-model="vm.isbn" type="number" id="isbn" name="isbn" class="form-control" placeholder="ISBN"
+				   required>
+			<button class="btn btn-lg btn-primary btn-block" ng-click="vm.addBook()">Toevoegen</button>
+			<p>
+				<a href="index.html">Startpagina</a>
+			</p>
+		</form>
+
+	</div>
+	<p>
+		<a href="index.html">Startpagina</a>
+	</p>
+</div>
+<script src="js/lib/angular/angular.min.js"></script>
+<script>
+	angular.module('myApp', [])
+			.controller('boekController', boekController);
+	function boekController($http) {
+		// 0. initialisaties, variabelen
+		var vm = this;
+		var url = 'http://localhost:3000/api/boeken';
+		var urlAddBook = 'http://localhost:3000/api/addbook';
+		vm.addBookVisible = false;
+
+		// 1. Eerste keer laden: haal boeken op.
+		$http({
+			method: 'get',
+			url   : url
+		}).then(function (boeken) {
+			vm.boeken = boeken.data;
+		}).catch(function (err) {
+			alert('Error: er is een fout opgetreden ' + err);
+		});
+
+		// 2. Formulier zichtbaar maken
+		vm.showForm = function () {
+			vm.addBookVisible = true;
+		};
+
+		// 3. Boek toevoegen vanuit formulier
+		vm.addBook = function () {
+			// 3a. Nieuw boek-object maken
+			var newBook = {
+				"titel" : vm.titel,
+				"auteur": vm.auteur,
+				"ISBN"  : vm.isbn
+			};
+			// 3b. Verzenden naar Express-server
+			$http({
+				method : 'post',
+				url    : urlAddBook,
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				data   : newBook
+			}).then(function (boeken) {
+				// Teruggekregen boeken (incl. nieuwe titel) binden aan de tabel.
+				vm.boeken = boeken.data;
+			}).catch(function (err) {
+				alert('Er is een fout opgetreden: ' + err);
+			})
+		}
+	}
+</script>
+</body>
+</html>

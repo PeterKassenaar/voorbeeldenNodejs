@@ -1,0 +1,14 @@
+{
+  "name": "praktijkoefening3.3",
+  "version": "1.0.0",
+  "description": "Mogelijke uitwerking van praktijkoefening 3.3",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Peter Kassenaar",
+  "license": "ISC",
+  "dependencies": {
+    "colors": "^1.1.0"
+  }
+}

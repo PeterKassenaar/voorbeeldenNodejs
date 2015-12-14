@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="nl">
+<head>
+	<meta charset="UTF-8">
+	<title>Auteurs</title>
+	<link rel="stylesheet" href="js/lib/bootstrap/dist/css/bootstrap.min.css"/>
+</head>
+<body ng-app="myApp">
+<div class="container" ng-controller="auteurController as vm">
+	<h1>Auteurs</h1>
+	<table class="table table-striped">
+		<tr>
+			<th>ID</th>
+			<th>Naam</th>
+			<th>Specialiteit</th>
+		</tr>
+		<tr ng-repeat="auteur in vm.auteurs">
+			<td>{{auteur.id}}</td>
+			<td>{{auteur.naam}}</td>
+			<td>{{auteur.specialiteit}}</td>
+		</tr>
+	</table>
+	<p>
+		<a href="index.html">Startpagina</a>
+	</p>
+</div>
+<script src="js/lib/angular/angular.min.js"></script>
+<script>
+	angular.module('myApp', [])
+			.controller('auteurController', auteurController)
+			.constant('CONSTANTS', {
+				//apiUrl: 'http://pk-nodejs.azurewebsites.net/api/auteurs'
+				apiUrl: 'https://obscure-ridge-6480.herokuapp.com/api/auteurs'
+			});
+	auteurController.$inject = ['$http', 'CONSTANTS'];// minify-safe injection
+	function auteurController($http, CONSTANTS) {
+		var vm = this;
+		var url = CONSTANTS.apiUrl;
+		$http({
+			method: 'get',
+			url   : url
+		}).then(function (auteurs) {
+			vm.auteurs = auteurs.data;
+		}).catch(function (err) {
+			alert('Error: er is een fout opgetreden ' + err);
+		})
+	}
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<title>Login formulier</title>
+	<link rel="stylesheet" href="js/lib/bootstrap/dist/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+	<h1>Formulier</h1>
+
+	<p>Demo van het verwerken van POST-data in een Express-app. Er worden
+		geen gegevens vastgelegd, in de route \user worden alleen de doorgegeven
+		parameter geëchood.</p>
+
+	<form class="form-signin col-md-6"
+		  method="post"
+		  action="http://localhost:3000/user">
+		<h2 class="form-signin-heading">Aanmelden</h2>
+		<label for="username">Gebruikersnaam</label>
+		<input type="text" id="username" name="username" class="form-control" placeholder="Gebruikersnaam" required
+			   autofocus>
+
+		<label for="email">E-mailadres</label>
+		<input type="email" id="email" name="email" class="form-control" placeholder="E-mailadres" required>
+		<button class="btn btn-lg btn-primary btn-block" type="submit">Aanmelden</button>
+		<p>
+			<a href="index.html">Startpagina</a>
+		</p>
+	</form>
+</div>
+</body>
+</html>

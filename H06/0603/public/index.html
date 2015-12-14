@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<title>Boeken Express</title>
+	<link rel="stylesheet" href="js/lib/bootstrap/dist/css/bootstrap.min.css"/>
+</head>
+<body ng-app="myApp">
+<div class="container" ng-controller="boekController as vm">
+	<h1>De Boeken Express</h1>
+
+	<table class="table table-striped">
+		<tr>
+			<th>Titel</th>
+			<th>auteur</th>
+			<th>ISBN</th>
+			<th></th>
+		</tr>
+		<tr ng-repeat="boek in vm.boeken">
+			<td>{{boek.titel}}</td>
+			<td>{{boek.auteur}}</td>
+			<td>{{boek.ISBN}}</td>
+			<td>
+				<button ng-click="vm.deleteBook(boek)" class="btn btn-danger">Verwijderen</button>
+			</td>
+		</tr>
+	</table>
+	<p>
+		<button ng-click="vm.showForm()" class="btn btn-lg btn-primary">Boek toevoegen</button>
+	</p>
+	<!-- formulier voor toevoegen van boek. Wordt getoond als vm.showForm 'true' is
+		via bovenstaande knop -->
+	<div ng-show="vm.formVisible">
+		<h3>{{ vm.result }}</h3>
+
+		<h2>Boek toevoegen</h2>
+		<label for="titel">Titel</label>
+		<input type="text" ng-model="vm.titel" id="titel" name="titel" class="form-control" placeholder="Titel" required
+			   autofocus>
+
+		<label for="auteur">Auteur</label>
+		<input type="text" ng-model="vm.auteur" id="auteur" name="auteur" class="form-control" placeholder="Auteur"
+			   required>
+		<label for="isbn">ISBN</label>
+		<input type="text" ng-model="vm.isbn" id="isbn" name="isbn" class="form-control" placeholder="ISBN" required>
+		<button class="btn btn-lg btn-primary btn-block" ng-click="vm.addBook()">Toevoegen</button>
+
+	</div>
+</div>
+<!-- HIER: alles Quick & Dirty in één bestand geplaatst: in werkelijkheid
+	dit liever modulair opzetten met meerdere .js-bestanden -->
+<script src="js/lib/angular/angular.min.js"></script>
+<script>
+	(function () {
+		'use strict';
+
+		angular.module('myApp', [])
+				.controller('boekController', boekController);
+
+		boekController.$inject = ['$http', '$timeout']; // minify safe
+		function boekController($http, $timeout) {
+			// 0. Initialisaties
+			var vm = this,
+					url = 'http://localhost:3000/api/boeken';
+			vm.formVisible = false;
+			vm.result = '';
+
+			// 1. Boeken ophalen.
+			$http({
+				method: 'get',
+				url   : url
+			}).then(function (boeken) {
+				vm.boeken = boeken.data;
+			}).catch(function (err) {
+				alert('Error: er is een fout opgetreden ' + err);
+			});
+
+			// 2. Formulier zichtbaar maken
+			vm.showForm = function () {
+				vm.formVisible = !vm.formVisible;
+			};
+			// 3. Boek toevoegen
+			vm.addBook = function () {
+				$http({
+					method: 'post',
+					url   : url,
+					data  : {
+						titel : vm.titel,
+						auteur: vm.auteur,
+						isbn  : vm.isbn
+					}
+				}).then(function (newBook) {
+					vm.boeken.push(newBook.data);
+					vm.result = 'Boek toegevoegd!';
+					$timeout(function () {
+						// reset velden
+						vm.formVisible = false;
+						vm.result = '';
+						vm.titel = vm.auteur = vm.isbn = '';
+					}, 1500)
+				}).catch(function (err) {
+					alert('Error: er is een fout opgetreden ' + err);
+				});
+			};
+
+			// 4. Boek verwijderen
+			vm.deleteBook = function (book) {
+				if (confirm(book.titel + ' wordt verwijderd. Weet u het zeker?')) {
+					$http({
+						method: 'delete',
+						url   : url + '/' + book._id
+					}).then(function (removed) {
+						vm.boeken.forEach(function(huidigBoek, index){
+							if(huidigBoek._id === book._id){
+								vm.boeken.splice(index, 1);
+							}
+						});
+					}).catch(function (err) {
+						alert('Error: er is een fout opgetreden ' + err);
+					});
+				}
+			};
+		}
+	})();
+</script>
+</body>
+</html>

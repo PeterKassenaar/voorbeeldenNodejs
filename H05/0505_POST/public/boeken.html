@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="nl">
+<head>
+	<meta charset="UTF-8">
+	<title>Boeken</title>
+	<link rel="stylesheet" href="js/lib/bootstrap/dist/css/bootstrap.min.css"/>
+</head>
+<body ng-app="myApp">
+<div class="container" ng-controller="boekController as vm">
+	<h1>Boeken</h1>
+	<table class="table table-striped">
+		<tr>
+			<th>ID</th><th>Titel</th><th>auteur</th><th>ISBN</th>
+		</tr>
+		<tr ng-repeat="boek in vm.boeken">
+			<td>{{boek.id}}</td>
+			<td>{{boek.titel}}</td>
+			<td>{{boek.auteur}}</td>
+			<td>{{boek.ISBN}}</td>
+		</tr>
+	</table>
+	<p>
+		<a href="index.html">Startpagina</a>
+	</p>
+</div>
+<script src="js/lib/angular/angular.min.js"></script>
+<script>
+	angular.module('myApp',[])
+			.controller('boekController', boekController);
+	function boekController($http){
+		var vm = this;
+		var url = 'http://localhost:3000/api/boeken';
+		$http({
+			method:'get',
+			url: url
+		}).then(function(boeken){
+			vm.boeken = boeken.data;
+		}).catch(function(err){
+			alert('Error: er is een fout opgetreden ' + err);
+		})
+	}
+</script>
+</body>
+</html>

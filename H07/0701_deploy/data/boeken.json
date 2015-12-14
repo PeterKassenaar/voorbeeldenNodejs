@@ -1,0 +1,26 @@
+[
+  {
+	"id": 1,
+	"titel": "Web Development Library - AngularJS",
+	"auteur": "Peter Kassenaar",
+	"ISBN": "9789059407879"
+  },
+  {
+	"id": 2,
+	"titel": "Focus op Fotografie: Portretfotografie",
+	"auteur": "Pieter Dhaeze",
+	"ISBN": "9789059408128"
+  },
+  {
+	"id": 3,
+	"titel": "App Development Library - Apps maken voor Android",
+	"auteur": "Michiel de Rond",
+	"ISBN": "9789059408395"
+  },
+  {
+	"id": 4,
+	"titel": "Ontdek de Windows-tablet",
+	"auteur": "Bob van Duuren",
+	"ISBN": "9789059406186"
+  }
+]

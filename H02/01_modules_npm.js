@@ -1,6 +1,7 @@
 // Maak module helloworld.js en exporteer deze
 var myFunc = function(input){
-	return input + ' world'
+	"use strict";
+	return input + ' world';
 };
 module.exports.HelloWorld = myFunc;
 

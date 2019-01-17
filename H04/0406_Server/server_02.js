@@ -31,7 +31,7 @@ var server = http.createServer(function (req, res) {
 	// 1c. Serveer gevraagde bestand.
 	function serveFile(requestFile) {
 		// 2. Maak een stream en server op basis van Events
-		res.writeHead(200, {'Content-Type': mime.lookup(requestFile)});
+		res.writeHead(200, {'Content-Type': mime.getType(requestFile)});
 		var stream = fs.createReadStream(requestFile);
 		stream.on('data', function (chunk) {
 			res.write(chunk);
@@ -46,7 +46,7 @@ var server = http.createServer(function (req, res) {
 
 	// 1d. Serveer 404, inclusief juiste http-header
 	function serve404(requestFile) {
-		res.writeHead(404, {'Content-Type': mime.lookup(requestFile)});
+		res.writeHead(404, {'Content-Type': mime.getType(requestFile)});
 		fs.readFile(requestFile, 'utf8', function (err, data) {
 			if (err) {
 				console.log('Error: ', err);

@@ -56,3 +56,10 @@ app.get('/books-async', async (req, res) => {
 app.listen(3000, () => {
 	console.log('Server started on port 3000');
 })
+
+// 8. Some notes: 'request' used to be the de facto default library for proxy request.
+// This package is now deprecated. See https://github.com/request/request/issues/3142 for details.
+
+// In this example we use axios as an alternative. But there are more!
+// Refer to this blog post for examples: https://nodesource.com/blog/express-going-into-maintenance-mode
+

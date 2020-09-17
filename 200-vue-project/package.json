@@ -1,6 +1,6 @@
 {
-  "name": "@peter.kassenaar/pk-vue-components",
-  "version": "0.1.2",
+  "name": "@peter.kassenaar/pk-vue-components-2",
+  "version": "0.0.1",
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",

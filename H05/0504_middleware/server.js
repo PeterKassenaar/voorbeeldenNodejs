@@ -15,7 +15,7 @@ app.use(function(req, res, next){
 });
 
 //*********************
-// 3a. Middleware-functie voor één route
+// 3a. Middleware-functie voor 1 route
 //*********************
 app.use('/index.html', function(req, res, next){
 	console.log('Homepage opgevraagd: ', new Date());

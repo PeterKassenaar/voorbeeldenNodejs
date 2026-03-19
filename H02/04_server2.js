@@ -1,7 +1,7 @@
 // De opgevraagde URL in de website tonen.
-var http = require('http');
-var server = http.createServer(function (request, response) {
-	var url = request.url;
+const http = require('http');
+const server = http.createServer(function (request, response) {
+	const url = request.url;
 	response.writeHead(200, {'Content-Type':'text/html'});
 	response.write('<h1>De gevraagde URL: ' + url + '</h1>');
 	response.end();

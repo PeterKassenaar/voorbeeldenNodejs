@@ -1,7 +1,7 @@
 // Hello World als webserver.
-var http = require('http');
+const http = require('http');
 var server = http.createServer(function (request, response) {
-	"use strict";
+	// Old: we have to use "use strict";
 	response.writeHead(200, {'Content-Type':'text/plain'});
 	response.write('Hello World');
 	response.end();

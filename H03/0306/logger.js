@@ -1,6 +1,7 @@
 // Require de module 'moment'. Let op ontbreken van de pad-informatie.
 // Node.js kijkt dan standaard in \node_modules
-var moment = require('moment'),
+// Moderne notatie: vervang `var` door `const`
+const moment = require('moment'),
 	colors = require('colors');
 module.exports = function () {
 	moment.locale('nl');	// Stel Nederlandse notatie in
